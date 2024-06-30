@@ -22,11 +22,9 @@
     
     plymouth = {
       enable = true;
-      theme = "colorful";
-      themePackages = with pkgs; [
-        (adi1090x-plymouth-themes.override {
-          selected_themes = [ "colorful" ];
-	})
+      theme = "plymouth-theme-bowlbird-logo";
+      themePackages =  [
+        inputs.plymouth-theme-bowlbird-logo	
       ];
     };
 
@@ -105,7 +103,6 @@
 		theme = "terminalparty";
 		plugins = [
 			"git"
-			"fzf"
 		];
 	};
 };

@@ -7,8 +7,10 @@
 			url = "github:nix-community/home-manager";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
+
+		plymouth-theme-bowlbird-logo.url = "github:bowlbird/plymouth-theme-bowlbird-logo";
 	};
-	outputs = { self, nixpkgs, home-manager, ... } @ inputs: 
+	outputs = { self, nixpkgs, home-manager, plymouth-theme-bowlbird-logo, ... } @ inputs: 
 		let
 			inherit (self) outputs;
 		in {		
