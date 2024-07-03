@@ -22,9 +22,9 @@
     
     plymouth = {
       enable = true;
-      theme = "plymouth-theme-bowlbird-logo";
+      theme = "bowlbird-logo";
       themePackages =  [
-        inputs.plymouth-theme-bowlbird-logo	
+        inputs.plymouth-theme-bowlbird-logo.packages.x86_64-linux.default
       ];
     };
 
