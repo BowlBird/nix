@@ -14,14 +14,17 @@
 		let
 			inherit (self) outputs;
 
+			args = {inherit inputs outputs;};
+
 			system = modules: nixpkgs.lib.nixosSystem { 
-				specialArgs = {inherit inputs outputs;};
+				system = "x86_64-linux";
+				specialArgs = args;
 				inherit modules; 
 			};
 
 			home = modules: home-manager.lib.homeManagerConfiguration {
 				pkgs = nixpkgs.legacyPackages.x86_64-linux;
-				extraSpecialArgs = {inherit inputs outputs;};
+				extraSpecialArgs = args; 
 				inherit modules;
 			};
 		in {		
