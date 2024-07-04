@@ -10,23 +10,27 @@
 
 		plymouth-theme-bowlbird-logo.url = "github:bowlbird/plymouth-theme-bowlbird-logo";
 	};
-	outputs = { self, nixpkgs, home-manager, plymouth-theme-bowlbird-logo, ... } @ inputs: 
+	outputs = { self, nixpkgs, home-manager, ... } @ inputs: 
 		let
 			inherit (self) outputs;
+
+			system = modules: nixpkgs.lib.nixosSystem { 
+				specialArgs = {inherit inputs outputs;};
+				inherit modules; 
+			};
+
+			home = modules: home-manager.lib.homeManagerConfiguration {
+				pkgs = nixpkgs.legacyPackages.x86_64-linux;
+				extraSpecialArgs = {inherit inputs outputs;};
+				inherit modules;
+			};
 		in {		
 			nixosConfigurations = {
-				vm = nixpkgs.lib.nixosSystem {
-					specialArgs = {inherit inputs outputs;};
-					modules = [./nixos/configuration.nix];
-				};
+				vm = system [./nixos/configuration.nix];
 			};
 
 			homeConfigurations = {
-				"bowlbird@vm" = home-manager.lib.homeManagerConfiguration {
-					pkgs = nixpkgs.legacyPackages.x86_64-linux;
-					extraSpecialArgs = {inherit inputs outputs;};
-					modules = [./home-manager/home.nix];
-				};
+				"bowlbird@vm" = home [./home-manager/home.nix];
 			};
 		};
 }

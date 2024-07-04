@@ -14,14 +14,14 @@
     packages = with pkgs; [];
   };
 
-    programs.home-manager.enable = true;
+  programs.home-manager.enable = true;
 
-    programs.git = {
-    	enable = true;
-	userName = "bowlbird";
-	userEmail = "bowlbirdcontact@gmail.com";
- 	extraConfig = {
-		init.defaultBranch = "main";
-	};
-   };
+  programs.git = {
+  	enable = true;
+  	userName = "bowlbird";
+	  userEmail = "bowlbirdcontact@gmail.com";
+ 	  extraConfig = {
+		  init.defaultBranch = "main";
+	  };
+  };
 }
