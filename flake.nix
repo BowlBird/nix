@@ -22,18 +22,24 @@
 				inherit modules; 
 			};
 
-			home = modules: home-manager.lib.homeManagerConfiguration {
-				pkgs = nixpkgs.legacyPackages.x86_64-linux;
-				extraSpecialArgs = args; 
-				inherit modules;
-			};
+			homes = systems: with nixpkgs.lib; let 
+				systems = flatten forEach systems (system: forEach system.users (user: {inherit system; inherit user;}));	
+			in
+				listToAttrs forEach systems (system: {
+					name = "${user}@${system}";
+					value = home-manager.lib.homeManagerConfiguration {
+						pkgs = nixpkgs.legacyPackages.x86_64-linux;
+						extraSpecialArgs = args; 
+						module = (./home + "/${user}/${system}");
+				};
+			});
 		in {		
 			nixosConfigurations = {
-				vm = system [./nixos/configuration.nix];
+				nest = system [./nixos/configuration.nix];
 			};
 
-			homeConfigurations = {
-				"bowlbird@vm" = home [./home-manager/home.nix];
-			};
+			homeConfigurations = homes [ 
+				{ system = "nest"; users = ["bowlbird"]; }
+			];
 		};
 }
