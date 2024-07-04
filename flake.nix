@@ -25,7 +25,7 @@
 			homes = systems: with nixpkgs.lib; let 
 				systems = flatten forEach systems (system: forEach system.users (user: {inherit system; inherit user;}));	
 			in
-				listToAttrs forEach systems (system: {
+				builtins.listToAttrs forEach systems (system: {
 					name = "${user}@${system}";
 					value = home-manager.lib.homeManagerConfiguration {
 						pkgs = nixpkgs.legacyPackages.x86_64-linux;
