@@ -23,5 +23,18 @@
 						};
 					}) 
 					systemDefinitions
-				); 
+				);
+
+  buildSystems = systems: args: builtins.listToAttrs 
+    (map
+      (system: {
+        name = system;
+        value = nixpkgs.lib.nixosSystem { 
+  				system = "x86_64-linux";
+	  			specialArgs = args;
+		  		modules = [(./host + "/${system}")]; 
+        };
+      })
+      systems
+    );
 }

@@ -17,16 +17,10 @@
 			args = {inherit inputs outputs;};
 
 			utils = import ./utils.nix { inherit nixpkgs; inherit inputs; };
-
-			system = modules: nixpkgs.lib.nixosSystem { 
-				system = "x86_64-linux";
-				specialArgs = args;
-				inherit modules; 
-			};
 		in {		
-			nixosConfigurations = {
-				nest = system [./nixos/configuration.nix];
-			};
+			nixosConfigurations = utils.buildSystems [
+				"nest"
+			] args;
 
 			homeConfigurations = utils.buildHomes [ 
 				{ system = "nest"; users = ["bowlbird"]; }
