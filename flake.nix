@@ -23,16 +23,29 @@
 			};
 
 			homes = systems: with nixpkgs.lib; let 
-				systems = flatten forEach systems (system: forEach system.users (user: {inherit system; inherit user;}));	
+				systemDefinitions = flatten
+					(map 
+						(system: (map
+							(user: {inherit (system) system; inherit user;}) 
+							system.users
+						)) 
+						systems
+					);	
 			in
-				builtins.listToAttrs forEach systems (system: {
-					name = "${user}@${system}";
-					value = home-manager.lib.homeManagerConfiguration {
-						pkgs = nixpkgs.legacyPackages.x86_64-linux;
-						extraSpecialArgs = args; 
-						module = (./home + "/${user}/${system}");
-				};
-			});
+				builtins.listToAttrs 
+				(map 
+					(definition: let 
+						inherit (definition) user system;
+					in {
+						name = "${user}@${system}";
+						value = home-manager.lib.homeManagerConfiguration {
+							pkgs = nixpkgs.legacyPackages.x86_64-linux;
+							extraSpecialArgs = args; 
+							module = (./home + "/${user}/${system}");
+						};
+					}) 
+					systemDefinitions
+				);
 		in {		
 			nixosConfigurations = {
 				nest = system [./nixos/configuration.nix];
