@@ -48,7 +48,7 @@
       };
     };
   };
-  networking.hostName = "vm";
+  networking.hostName = "nest";
   networking.networkmanager.enable = true;
 
   time.timeZone = "America/Chicago";

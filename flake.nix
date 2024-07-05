@@ -41,7 +41,7 @@
 						value = home-manager.lib.homeManagerConfiguration {
 							pkgs = nixpkgs.legacyPackages.x86_64-linux;
 							extraSpecialArgs = args; 
-							module = (./home + "/${user}/${system}");
+							modules = [(./home + "/${user}/${system}")];
 						};
 					}) 
 					systemDefinitions
