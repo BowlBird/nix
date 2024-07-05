@@ -16,43 +16,20 @@
 
 			args = {inherit inputs outputs;};
 
+			utils = import ./utils.nix { inherit (nixpkgs) lib; };
+
 			system = modules: nixpkgs.lib.nixosSystem { 
 				system = "x86_64-linux";
 				specialArgs = args;
 				inherit modules; 
 			};
-
-			homes = systems: with nixpkgs.lib; let 
-				systemDefinitions = flatten
-					(map 
-						(system: (map
-							(user: {inherit (system) system; inherit user;}) 
-							system.users
-						)) 
-						systems
-					);	
-			in
-				builtins.listToAttrs 
-				(map 
-					(definition: let 
-						inherit (definition) user system;
-					in {
-						name = "${user}@${system}";
-						value = home-manager.lib.homeManagerConfiguration {
-							pkgs = nixpkgs.legacyPackages.x86_64-linux;
-							extraSpecialArgs = args; 
-							modules = [(./home + "/${user}/${system}")];
-						};
-					}) 
-					systemDefinitions
-				);
 		in {		
 			nixosConfigurations = {
 				nest = system [./nixos/configuration.nix];
 			};
 
-			homeConfigurations = homes [ 
+			homeConfigurations = utils.buildHomes [ 
 				{ system = "nest"; users = ["bowlbird"]; }
-			];
+			] args;
 		};
 }
