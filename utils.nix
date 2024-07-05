@@ -1,4 +1,4 @@
-{ lib }: {
+{ lib, inputs }: {
 
   buildHomes = systems: args: with lib; let 
     systemDefinitions = flatten
@@ -16,7 +16,7 @@
 						inherit (definition) user system;
 					in {
 						name = "${user}@${system}";
-						value = home-manager.lib.homeManagerConfiguration {
+						value = inputs.home-manager.lib.homeManagerConfiguration {
 							pkgs = nixpkgs.legacyPackages.x86_64-linux;
 							extraSpecialArgs = args; 
 							modules = [(./home + "/${user}/${system}")];
