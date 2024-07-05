@@ -1,6 +1,6 @@
-{ lib, inputs }: {
+{ nixpkgs, inputs }: {
 
-  buildHomes = systems: args: with lib; let 
+  buildHomes = systems: args: with nixpkgs.lib; let 
     systemDefinitions = flatten
       (map 
         (system: (map

@@ -16,7 +16,7 @@
 
 			args = {inherit inputs outputs;};
 
-			utils = import ./utils.nix { inherit (nixpkgs) lib; inherit inputs; };
+			utils = import ./utils.nix { inherit nixpkgs; inherit inputs; };
 
 			system = modules: nixpkgs.lib.nixosSystem { 
 				system = "x86_64-linux";
