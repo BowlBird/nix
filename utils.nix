@@ -50,7 +50,7 @@
               value = inputs.home-manager.lib.homeManagerConfiguration {
                 pkgs = nixpkgs.legacyPackages.x86_64-linux;
                 extraSpecialArgs = args; 
-                modules = [(./home + "/${user}/${system}")];
+                modules = [(./host + "/${system}/home/${user}")];
               };
             }) 
             systemDefinitions
