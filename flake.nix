@@ -17,13 +17,7 @@
 			args = {inherit inputs outputs;};
 
 			utils = import ./utils.nix { inherit nixpkgs; inherit inputs; };
-		in {		
-			nixosConfigurations = utils.buildSystems [
-				"nest"
-			] args;
-
-			homeConfigurations = utils.buildHomes [ 
-				{ system = "nest"; users = ["bowlbird"]; }
-			] args;
+		in {
+			inherit (utils.build args) nixosConfigurations homeConfigurations;
 		};
 }
