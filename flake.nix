@@ -14,8 +14,7 @@
 		let
 			inherit (self) outputs;
 
-			args = {inherit inputs outputs;};
-
 			utils = import ./utils.nix { inherit nixpkgs; inherit inputs; };
-		in utils.build args;
+			
+		in utils.build {inherit inputs outputs;};
 }
