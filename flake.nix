@@ -17,7 +17,5 @@
 			args = {inherit inputs outputs;};
 
 			utils = import ./utils.nix { inherit nixpkgs; inherit inputs; };
-		in {
-			inherit (utils.build args) nixosConfigurations homeConfigurations;
-		};
+		in utils.build args;
 }
