@@ -10,13 +10,13 @@
     (map 
       (host: {
         system = host;
-        users = (builtins.mapAttrsToList
+        users = (nixpkgs.lib.mapAttrsToList
           (name: value: name)
           (builtins.readDir (./home + "/${host}/home"))
         );
-      }
+      })
       hosts
-    ));
+    );
 
     buildSystems = systems: args: builtins.listToAttrs 
       (map
