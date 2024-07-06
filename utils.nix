@@ -12,7 +12,7 @@
         system = host;
         users = (nixpkgs.lib.mapAttrsToList
           (name: value: name)
-          (builtins.readDir (./home + "/${host}/home"))
+          (builtins.readDir (./host + "/${host}/home"))
         );
       })
       hosts
