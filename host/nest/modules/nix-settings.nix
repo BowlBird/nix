@@ -1,1 +1,0 @@
-common/host/nix-settings.nix
