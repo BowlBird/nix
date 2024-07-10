@@ -1,6 +1,6 @@
-{ inputs, lib, config, pkgs, ... }:
+{ inputs, utils, lib, config, pkgs, ... }:
 {
-  imports = inputs.utils.hostImports "nest";
+  imports = utils.hostImports "nest";
   
   boot = {
     consoleLogLevel = 0;

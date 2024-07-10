@@ -1,7 +1,7 @@
-{ ... }: {
+{ nixpkgs, ... }: {
 
-  build = pkgs: args: let 
-    hosts = (pkgs.lib.mapAttrsToList 
+  build = args: let 
+    hosts = (nixpkgs.lib.mapAttrsToList 
       (name: value: name)
       (builtins.readDir ./host)
     );
@@ -10,7 +10,7 @@
     (map 
       (host: {
         system = host;
-        users = (pkgs.lib.mapAttrsToList
+        users = (nixpkgs.lib.mapAttrsToList
           (name: value: name)
           (builtins.readDir (./host + "/${host}/home"))
         );
@@ -22,7 +22,7 @@
       (map
         (system: {
           name = system;
-          value = pkgs.lib.nixosSystem { 
+          value = nixpkgs.lib.nixosSystem { 
             system = "x86_64-linux";
             specialArgs = args;
             modules = [(./host + "/${system}")]; 
@@ -31,7 +31,7 @@
         systems
       );
 
-    buildHomes = systems: args: with pkgs.lib; let 
+    buildHomes = systems: args: with nixpkgs.lib; let 
       systemDefinitions = flatten
         (map 
           (system: (map

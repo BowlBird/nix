@@ -9,15 +9,12 @@
 		};
 
 		plymouth-theme-bowlbird-logo.url = "github:bowlbird/plymouth-theme-bowlbird-logo";
-
-		utils = import ./utils.nix { };
-
 	};
 	outputs = { self, nixpkgs, home-manager, ... } @ inputs: 
 		let
 			inherit (self) outputs;
 
-			utils = import ./utils.nix { inherit nixpkgs; inherit inputs; };
+			utils = import ./utils.nix { inherit nixpkgs;};
 			
-		in utils.build nixpkgs {inherit inputs outputs;};
+		in utils.build {inherit inputs utils outputs;};
 }
