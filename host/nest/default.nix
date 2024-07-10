@@ -1,20 +1,6 @@
 { inputs, lib, config, pkgs, ... }:
 {
-  imports =
-    [ 
-      ./hardware-configuration.nix
-    ];
-  
-  nix.settings.experimental-features = [
-    "nix-command" 
-    "flakes" 
-  ];
-  
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
-  };
+  imports = inputs.utils.hostImports "nest";
   
   boot = {
     consoleLogLevel = 0;

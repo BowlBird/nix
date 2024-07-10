@@ -59,4 +59,14 @@
       nixosConfigurations = buildSystems hosts args;
       homeConfigurations = buildHomes users args;
     };
+
+  hostImports = system: let
+    dir = ./host + "/${system}/modules";
+  in
+    (map
+      (file: dir + "/${file}")
+      (builtins.attrNames 
+        (builtins.readDir dir)
+      )
+    );
 }
