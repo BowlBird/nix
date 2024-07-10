@@ -1,8 +1,8 @@
 { inputs, utils, lib, config, pkgs, ... }:
 {
   imports = utils.buildImports {
-    host = [nix-settings]
-  }
+    host = [nix-settings];
+  };
 
   boot = {
     consoleLogLevel = 0;
