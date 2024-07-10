@@ -1,4 +1,4 @@
-{ nixpkgs, inputs }: {
+{ nixpkgs, ... }: {
 
   build = args: let 
     hosts = (nixpkgs.lib.mapAttrsToList 

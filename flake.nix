@@ -1,6 +1,6 @@
 {
 	description = "BowlBirdOS";
-	inputs = {
+	inputs = rec {
 		nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 	
 		home-manager = {
@@ -9,6 +9,9 @@
 		};
 
 		plymouth-theme-bowlbird-logo.url = "github:bowlbird/plymouth-theme-bowlbird-logo";
+
+		utils = import ./utils.nix {inherit nixpkgs;};
+
 	};
 	outputs = { self, nixpkgs, home-manager, ... } @ inputs: 
 		let
