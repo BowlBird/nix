@@ -1,13 +1,13 @@
 { nixpkgs, ... }: {
 
-  build = args: let 
-    hosts = (nixpkgs.lib.mapAttrsToList 
+  build = args: let
+    hosts = (nixpkgs.lib.mapAttrsToList
       (name: value: name)
       (builtins.readDir ./host)
     );
 
-    users = 
-    (map 
+    users =
+    (map
       (host: {
         system = host;
         users = (nixpkgs.lib.mapAttrsToList
@@ -18,41 +18,41 @@
       hosts
     );
 
-    buildSystems = systems: args: builtins.listToAttrs 
+    buildSystems = systems: args: builtins.listToAttrs
       (map
         (system: {
           name = system;
-          value = nixpkgs.lib.nixosSystem { 
+          value = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             specialArgs = args;
-            modules = [(./host + "/${system}")]; 
+            modules = [(./host + "/${system}")];
           };
         })
         systems
       );
 
-    buildHomes = systems: args: with nixpkgs.lib; let 
+    buildHomes = systems: args: with nixpkgs.lib; let
       systemDefinitions = flatten
-        (map 
+        (map
           (system: (map
-            (user: {inherit (system) system; inherit user;}) 
+            (user: {inherit (system) system; inherit user;})
             system.users
-          )) 
+          ))
           systems
-        );	
+        );
       in
-        builtins.listToAttrs 
-          (map 
-            (definition: let 
+        builtins.listToAttrs
+          (map
+            (definition: let
               inherit (definition) user system;
             in {
               name = "${user}@${system}";
               value = inputs.home-manager.lib.homeManagerConfiguration {
                 pkgs = nixpkgs.legacyPackages.x86_64-linux;
-                extraSpecialArgs = args; 
+                extraSpecialArgs = args;
                 modules = [(./host + "/${system}/home/${user}")];
               };
-            }) 
+            })
             systemDefinitions
           );
     in {
@@ -60,13 +60,12 @@
       homeConfigurations = buildHomes users args;
     };
 
-  hostImports = system: let
-    dir = ./host + "/${system}/modules";
-  in
-    (map
-      (file: dir + "/${file}")
-      (builtins.attrNames 
-        (builtins.readDir dir)
-      )
-    );
+    buildImports = imports: flatten
+        (nixpkgs.lib.mapAttrsToList
+            (name: value: (map
+                (module: ../../common + "/${name}/${value}.nix")
+                (value)
+            ))
+            (imports)
+        )
 }

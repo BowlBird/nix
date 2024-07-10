@@ -1,7 +1,7 @@
-{ config, lib, pkgs, modulesPath, ... }: { 
+{ ... }: {
    nix.settings.experimental-features = [
-    "nix-command" 
-    "flakes" 
+    "nix-command"
+    "flakes"
   ];
 
   nix.gc = {

@@ -1,11 +1,13 @@
 { inputs, utils, lib, config, pkgs, ... }:
 {
-  imports = utils.hostImports "nest";
-  
+  imports = utils.buildImports {
+    host = [nix-settings]
+  }
+
   boot = {
     consoleLogLevel = 0;
     initrd.verbose = false;
-    
+
     plymouth = {
       enable = true;
       theme = "bowlbird-logo";
@@ -52,22 +54,22 @@
   };
 
   services.libinput.enable = true;
-  
+
   users.defaultUserShell = pkgs.zsh;
 
   users.users.bowlbird = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; 
+    extraGroups = [ "wheel" ];
     packages = with pkgs; [];
   };
-  
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
 	home-manager
- 	zsh 
+ 	zsh
   ];
-  
+
   programs.zsh = {
 	enable = true;
  	enableCompletion = true;
@@ -76,7 +78,7 @@
 		"AUTO_CD"
 		"HIST_IGNORE_DUPS"
 	];
-	
+
 	autosuggestions = {
 		enable = true;
 	};
@@ -95,7 +97,7 @@
 
   programs.neovim = {
     enable = true;
-    defaultEditor = true;  
+    defaultEditor = true;
   };
   programs.mtr.enable = true;
   programs.gnupg.agent = {
@@ -113,4 +115,3 @@
 
   system.stateVersion = "24.05";
 }
-
