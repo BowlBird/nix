@@ -60,7 +60,7 @@
       homeConfigurations = buildHomes users args;
     };
 
-    buildImports = imports: flatten
+    buildImports = imports: with nixpkgs.lib; flatten
         (nixpkgs.lib.mapAttrsToList
             (name: value: (map
                 (module: ../../common + "/${name}/${value}.nix")
