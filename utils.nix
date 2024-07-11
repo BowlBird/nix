@@ -60,12 +60,12 @@
       homeConfigurations = buildHomes users args;
     };
 
-    buildImports = imports: with nixpkgs.lib; flatten
-        (nixpkgs.lib.mapAttrsToList
-            (name: value: (map
-                (module: rootPath + "/common/${name}/${module}.nix")
-                (value)
-            ))
-            (imports)
-        );
+  buildImports = imports: with nixpkgs.lib; flatten
+    (nixpkgs.lib.mapAttrsToList
+      (name: value: (map
+        (module: rootPath + "/common/${name}/${module}.nix")
+        (value)
+      ))
+      (imports)
+    );
 }

@@ -1,18 +1,7 @@
-{ inputs, utils, lib, config, pkgs, ... }:
+{ inputs, sysUtils, lib, config, pkgs, ... }:
 {
-  # imports = utils.buildImports {
-    # host = [ "nix-settings" ];
-  # };
-  imports = [];
-  nix.settings.experimental-features = [
-   "nix-command"
-   "flakes"
-  ];
-
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
+  imports = utils.buildImports {
+    host = [ "nix-settings" ];
   };
 
   boot = {
