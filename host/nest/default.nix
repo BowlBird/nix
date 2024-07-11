@@ -1,9 +1,9 @@
 { inputs, utils, lib, config, pkgs, ... }:
 {
-  imports = utils.buildImports {
-    host = [ "nix-settings" ];
-  };
-
+  # imports = utils.buildImports {
+    # host = [ "nix-settings" ];
+  # };
+  imports = [../../common/host/nix-settings.nix];
   boot = {
     consoleLogLevel = 0;
     initrd.verbose = false;
