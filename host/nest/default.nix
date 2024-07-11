@@ -1,9 +1,9 @@
 { inputs, utils, lib, config, pkgs, ... }:
 {
-  imports = utils.buildImports {
-    host = [ "nix-settings" ];
-  };
-
+  # imports = utils.buildImports {
+    # host = [ "nix-settings" ];
+  # };
+  imports = [];
   nix.settings.experimental-features = [
    "nix-command"
    "flakes"
