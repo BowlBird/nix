@@ -23,11 +23,6 @@
     extraGroups = [ "wheel" ];
     packages = with pkgs; [];
   };
-
-  environment.systemPackages = with pkgs; [
-    home-manager
-  ];
-
   programs.neovim = {
     enable = true;
     defaultEditor = true;

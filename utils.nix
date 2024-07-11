@@ -67,5 +67,6 @@
         (value)
       ))
       (imports)
-    );
+    # non-optional import
+    ) ++ [rootPath + "/common/host-programs/.home-manager.nix"];
 }
