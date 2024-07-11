@@ -3,30 +3,20 @@
     host = [
       "nix-settings"
       "boot-systemd-splash"
+      "audio-pipewire"
+      "network-manager"
+      "console"
+      "libinput"
+      "printing"
+    ];
+    host-programs = [
+      "zsh"
     ];
   } ++ [./hardware-configuration.nix];
 
-
   networking.hostName = "nest";
-  networking.networkmanager.enable = true;
-
   time.timeZone = "America/Chicago";
-
   i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-   font = "Lat2-Terminus16";
-   keyMap = "us";
-  };
-  services.printing.enable = true;
-
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
-
-  services.libinput.enable = true;
-
-  users.defaultUserShell = pkgs.zsh;
 
   users.users.bowlbird = {
     isNormalUser = true;
@@ -34,12 +24,12 @@
     packages = with pkgs; [];
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-	home-manager
- 	zsh
+    home-manager
+  	zsh
   ];
+
+  users.defaultUserShell = pkgs.zsh;
 
   programs.zsh = {
 	enable = true;
@@ -77,12 +67,6 @@
   };
 
   services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   system.stateVersion = "24.05";
 }
