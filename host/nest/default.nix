@@ -4,6 +4,17 @@
     host = [ "nix-settings" ];
   };
 
+  nix.settings.experimental-features = [
+   "nix-command"
+   "flakes"
+  ];
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
   boot = {
     consoleLogLevel = 0;
     initrd.verbose = false;
