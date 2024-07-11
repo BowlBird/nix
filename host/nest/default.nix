@@ -1,6 +1,6 @@
 { inputs, sysUtils, lib, config, pkgs, ... }:
 {
-  imports = utils.buildImports {
+  imports = sysUtils.buildImports {
     host = [ "nix-settings" ];
   };
 
