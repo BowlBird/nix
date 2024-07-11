@@ -1,4 +1,4 @@
-{ nixpkgs, ... }: {
+{ nixpkgs, rootPath, ... }: {
 
   build = args: let
     hosts = (nixpkgs.lib.mapAttrsToList
@@ -63,7 +63,7 @@
     buildImports = imports: with nixpkgs.lib; flatten
         (nixpkgs.lib.mapAttrsToList
             (name: value: (map
-                (module: ./../../common + "/${name}/${module}.nix")
+                (module: rootPath + "/common/${name}/${module}.nix")
                 (value)
             ))
             (imports)

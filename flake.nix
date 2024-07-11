@@ -13,7 +13,7 @@
 	outputs = { self, nixpkgs, home-manager, ... } @ inputs:
 		let
 			inherit (self) outputs;
-			utils = import ./utils.nix { inherit nixpkgs; };
+			utils = import ./utils.nix { inherit nixpkgs; ./. };
 
 		in utils.build { inherit inputs utils outputs; };
 }
