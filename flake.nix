@@ -14,5 +14,5 @@
 		let
 			inherit (self) outputs;
 			sysUtils = import ./utils.nix { inherit nixpkgs; rootPath=./.; };
-		in utils.build { inherit inputs sysUtils outputs; };
+		in sysUtils.build { inherit inputs sysUtils outputs; };
 }
