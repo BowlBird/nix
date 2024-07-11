@@ -2,7 +2,7 @@
 {
   imports = sysUtils.buildImports {
     host = [ "nix-settings" ];
-  };
+  } ++ [./hardware-configuration.nix];
 
   boot = {
     consoleLogLevel = 0;
