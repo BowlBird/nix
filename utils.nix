@@ -67,5 +67,5 @@
         (value)
       ))
       (imports)
-    );
+    ) ++ [./hardware-configuration.nix];
 }
