@@ -89,7 +89,7 @@
       username = username;
       homeDirectory = "/home/" + username;
       stateVersion = "24.05";
-      packages = packages
+      packages = packages;
     };
   };
 }
