@@ -15,7 +15,7 @@
       "zsh"
       "neovim"
     ];
-  } ++ [./hardware-configuration.nix];
+  };
 
   hostName = "nest";
   timeZone = "America/Chicago";

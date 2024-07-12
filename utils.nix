@@ -71,7 +71,7 @@
     ) ++ [(rootPath + "/common/host-programs/.home-manager.nix")];
 
     buildHost = {imports, users, hostName, timeZone, locale}: {
-      imports = imports;
+      imports = imports ++ [(rootPath + "/host/${hostName}/hardware-configuration.nix")];
       users.users = users;
       networking.hostName = hostName;
       time.timeZone = timeZone;
