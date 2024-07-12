@@ -6,6 +6,6 @@
     ];
   };
 
-  username = "bowlbird"
+  username = "bowlbird";
   # packages = with pkgs; [];
 }
