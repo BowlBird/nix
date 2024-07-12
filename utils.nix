@@ -67,15 +67,29 @@
         (value)
       ))
       (imports)
-    # non-optional import
-    ) ++ [(rootPath + "/common/host-programs/.home-manager.nix")];
+    )
 
-    buildHost = {imports, users, hostName, timeZone, locale}: {
-      imports = imports ++ [(rootPath + "/host/${hostName}/hardware-configuration.nix")];
-      users.users = users;
-      networking.hostName = hostName;
-      time.timeZone = timeZone;
-      i18n.defaultLocale = locale;
-      system.stateVersion = "24.05";
+  buildHost = { imports, users, hostName, timeZone, locale }: {
+    imports = imports ++ [
+      (rootPath + "/common/host-programs/.home-manager.nix")
+      (rootPath + "/host/${hostName}/hardware-configuration.nix")
+    ];
+    users.users = users;
+    networking.hostName = hostName;
+    time.timeZone = timeZone;
+    i18n.defaultLocale = locale;
+    system.stateVersion = "24.05";
+  };
+
+  buildHome = { imports, username, packages }: {
+    imports = imports ++ [
+      (rootPath + "/common/home/.home-manager.nix")
+    ];
+    home = {
+      username = username;
+      homeDirectory = "/home/" + username;
+      stateVersion = "24.05";
+      packages = packages
     };
+  }
 }

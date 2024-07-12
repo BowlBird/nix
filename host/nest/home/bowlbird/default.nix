@@ -1,14 +1,11 @@
-{ inputs, sysUtils, lib, config, pkgs, ... }: {
+{ inputs, sysUtils, lib, config, pkgs, ... }: sysUtils.buildHome {
   imports = sysUtils.buildImports {
+    home = [];
     home-programs = [
       "git-bowlbird"
     ];
   };
 
-  home = {
-    username = "bowlbird";
-    homeDirectory = "/home/bowlbird";
-    stateVersion = "24.05";
-    packages = with pkgs; [];
-  };
+  username = "bowlbird"
+  # packages = with pkgs; [];
 }
