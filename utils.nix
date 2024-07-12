@@ -67,7 +67,7 @@
         (value)
       ))
       (imports)
-    )
+    );
 
   buildHost = { imports, users, hostName, timeZone, locale }: {
     imports = imports ++ [
