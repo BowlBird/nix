@@ -7,5 +7,4 @@
   };
 
   username = "bowlbird";
-  # packages = with pkgs; [];
 }

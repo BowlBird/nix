@@ -81,7 +81,7 @@
     system.stateVersion = "24.05";
   };
 
-  buildHome = { imports, username, packages }: {
+  buildHome = { imports, username }: {
     imports = imports ++ [
       (rootPath + "/common/home/.home-manager.nix")
     ];
