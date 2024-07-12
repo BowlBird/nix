@@ -1,4 +1,5 @@
 { ... }: {
+  home.packages = [];
   programs.git = {
   	enable = true;
   	userName = "bowlbird";
