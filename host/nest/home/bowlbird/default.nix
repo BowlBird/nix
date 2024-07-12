@@ -1,27 +1,14 @@
-{ inputs, lib, config, pkgs, ... }: {
-  
-  imports = [];
-  
-  nixpkgs.config = {
-	allowUnfree = true;
-	allowUnfreePredicate = _: true;
+{ inputs, sysUtils, lib, config, pkgs, ... }: {
+  imports = sysUtils.buildImports {
+    home-programs = [
+      "git-bowlbird"
+    ];
   };
 
   home = {
     username = "bowlbird";
     homeDirectory = "/home/bowlbird";
-    stateVersion = "24.11";
+    stateVersion = "24.05";
     packages = with pkgs; [];
-  };
-
-  programs.home-manager.enable = true;
-
-  programs.git = {
-  	enable = true;
-  	userName = "bowlbird";
-	  userEmail = "bowlbirdcontact@gmail.com";
- 	  extraConfig = {
-		  init.defaultBranch = "main";
-	  };
   };
 }
