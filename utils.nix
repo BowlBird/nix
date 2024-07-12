@@ -91,5 +91,5 @@
       stateVersion = "24.05";
       packages = packages
     };
-  }
+  };
 }
