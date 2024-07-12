@@ -69,4 +69,13 @@
       (imports)
     # non-optional import
     ) ++ [(rootPath + "/common/host-programs/.home-manager.nix")];
+
+    buildHost = {imports, users, hostName, timeZone, locale}: {
+      imports = imports;
+      users.users = users;
+      networking.hostName = hostName;
+      time.timeZone = timeZone;
+      i18n.defaultLocale = locale;
+      system.stateVersion = "24.05";
+    };
 }

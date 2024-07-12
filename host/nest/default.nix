@@ -1,4 +1,4 @@
-{ inputs, sysUtils, lib, config, pkgs, ... }: {
+{ inputs, sysUtils, lib, config, pkgs, ... }: sysUtils.buildHost {
   imports = sysUtils.buildImports {
     host = [
       "nix-settings"
@@ -17,15 +17,12 @@
     ];
   } ++ [./hardware-configuration.nix];
 
-  networking.hostName = "nest";
-  time.timeZone = "America/Chicago";
-  i18n.defaultLocale = "en_US.UTF-8";
+  hostName = "nest";
+  timeZone = "America/Chicago";
+  locale = "en_US.UTF-8";
 
-  users.users.bowlbird = {
+  users.bowlbird = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    packages = with pkgs; [];
   };
-
-  system.stateVersion = "24.05";
 }
