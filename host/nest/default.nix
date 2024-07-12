@@ -5,12 +5,15 @@
       "boot-systemd-splash"
       "audio-pipewire"
       "network-manager"
+      "ssh"
       "console"
       "libinput"
       "printing"
     ];
     host-programs = [
+      "gnupg"
       "zsh"
+      "neovim"
     ];
   } ++ [./hardware-configuration.nix];
 
@@ -23,17 +26,6 @@
     extraGroups = [ "wheel" ];
     packages = with pkgs; [];
   };
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  services.openssh.enable = true;
 
   system.stateVersion = "24.05";
 }
