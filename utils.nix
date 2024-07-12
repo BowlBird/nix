@@ -1,4 +1,4 @@
-{ nixpkgs, rootPath, ... }: {
+{ nixpkgs, home-manager, rootPath, ... }: {
 
   build = args: let
     hosts = (nixpkgs.lib.mapAttrsToList
@@ -47,7 +47,7 @@
               inherit (definition) user system;
             in {
               name = "${user}@${system}";
-              value = inputs.home-manager.lib.homeManagerConfiguration {
+              value = home-manager.lib.homeManagerConfiguration {
                 pkgs = nixpkgs.legacyPackages.x86_64-linux;
                 extraSpecialArgs = args;
                 modules = [(./host + "/${system}/home/${user}")];

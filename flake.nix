@@ -13,6 +13,6 @@
 	outputs = { self, nixpkgs, home-manager, ... } @ inputs:
 		let
 			inherit (self) outputs;
-			sysUtils = import ./utils.nix { inherit nixpkgs; rootPath=./.; };
+			sysUtils = import ./utils.nix { inherit nixpkgs home-manager; rootPath=./.; };
 		in sysUtils.build { inherit inputs sysUtils outputs; };
 }
