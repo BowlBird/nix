@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, rootPath, ... }: rec {
+{ nixpkgs, home-manager, ... }: rec {
 
   helpers = rec {
     childrenNameList = path:
