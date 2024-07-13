@@ -1,3 +1,7 @@
-{ pkgs, ... }: pkgs.writeScriptBin "system" ''
-  echo "hi"
-''
+{ pkgs, ... }: {
+  system = pkgs.writeScriptBin "system" ''
+    echo "hi"
+  '';
+
+  environment.systemPackages = [system];
+}
