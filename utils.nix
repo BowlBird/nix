@@ -91,4 +91,12 @@
       stateVersion = "24.05";
     };
   };
+
+  dirName = path: with pkgs.lib;
+      (builtins.elemAt
+        (lists.reverseList
+          (strings.splitString "/" (toString path))
+        )
+        0
+      );
 }
