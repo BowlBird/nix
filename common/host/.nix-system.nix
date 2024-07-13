@@ -1,3 +1,3 @@
 { pkgs, ... }: pkgs.writeScriptBin "system" ''
-    echo "hi"
-  '';
+  echo "hi"
+''
