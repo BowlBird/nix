@@ -14,6 +14,10 @@
         )
         0
       );
+
+    hostDir = host: ./host + "/${host}";
+
+    homeDir = host: home: ./host + "/${host}/${home}"
   };
 
   build = args: with helpers; let
@@ -22,7 +26,7 @@
       (map
         (host: {
           system = host;
-          users = childrenNameList (./host + "/${host}/home");
+          users = childrenNameList (hostDir host + "/home");
         })
         hosts
       );
