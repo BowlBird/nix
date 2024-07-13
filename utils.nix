@@ -70,8 +70,9 @@
     );
 
 
-  buildHost = hostName: { imports, timeZone, locale }:
+  buildHost = testHostName: { imports, timeZone, locale }:
     let
+      hostName = dirName (./.);
       getUsers = { }: builtins.listToAttrs
         (map
           (user: {
