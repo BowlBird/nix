@@ -27,7 +27,7 @@
     users =
       (map
         (host: {
-          system = host;
+          inherit host;
           users = childrenNameList (hostDir host + "/home");
         })
         hosts
