@@ -65,7 +65,7 @@
               value = home-manager.lib.homeManagerConfiguration {
                 pkgs = nixpkgs.legacyPackages.x86_64-linux;
                 extraSpecialArgs = args;
-                modules = [(userDir host user)];
+                modules = [(homeDir host user)];
               };
             })
             hostDefinitions
