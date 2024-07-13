@@ -1,4 +1,4 @@
-{ inputs, sysUtils, lib, config, pkgs, ... }: with sysUtils; buildHost (dirname ./.) {
+{ inputs, sysUtils, lib, config, pkgs, ... }: with sysUtils; buildHost (dirName ./.) {
   imports = sysUtils.buildImports {
     host = [
       "nix-settings"
