@@ -92,7 +92,7 @@
     };
   };
 
-  dirName = path: with pkgs.lib;
+  dirName = path: with nixpkgs.lib;
       (builtins.elemAt
         (lists.reverseList
           (strings.splitString "/" (toString path))
