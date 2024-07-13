@@ -19,9 +19,4 @@
 
   timeZone = "America/Chicago";
   locale = "en_US.UTF-8";
-
-  # users.bowlbird = {
-    # isNormalUser = true;
-    # extraGroups = [ "wheel" ];
-  # };
 }
