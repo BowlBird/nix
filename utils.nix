@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, rootPath, ... }: {
+{ nixpkgs, home-manager, rootPath, ... }: rec {
 
   build = args: let
     hosts = (nixpkgs.lib.mapAttrsToList
