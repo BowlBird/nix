@@ -107,7 +107,7 @@
         (hostDir host + "/hardware-configuration.nix")
       ];
       users = {inherit users;};
-      networking.hostName = hostName;
+      networking.hostName = host;
       time.timeZone = timeZone;
       i18n.defaultLocale = locale;
       system.stateVersion = "24.05";
