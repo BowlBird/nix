@@ -70,7 +70,7 @@
     );
 
 
-  buildHost = hostName: { imports, users, timeZone, locale }:
+  buildHost = hostName: { imports, timeZone, locale }:
     let
       getUsers = path: builtins.listToAttrs
         (map
@@ -93,7 +93,7 @@
         (rootPath + "/common/host-programs/.home-manager.nix")
         (rootPath + "/host/${hostName}/hardware-configuration.nix")
       ];
-      users.users = users;
+      users.users = getUsers path;
       networking.hostName = hostName;
       time.timeZone = timeZone;
       i18n.defaultLocale = locale;
