@@ -69,17 +69,36 @@
       (imports)
     );
 
-  buildHost = hostName: { imports, users, timeZone, locale }: {
-    imports = imports ++ [
-      (rootPath + "/common/host-programs/.home-manager.nix")
-      (rootPath + "/host/${hostName}/hardware-configuration.nix")
-    ];
-    users.users = users;
-    networking.hostName = hostName;
-    time.timeZone = timeZone;
-    i18n.defaultLocale = locale;
-    system.stateVersion = "24.05";
-  };
+
+  buildHost = hostName: { imports, users, timeZone, locale }:
+    let
+      getUsers = path: builtins.listToAttrs
+        (map
+          (user: {
+            name = user;
+            value = let
+                settings = import path + "/${user}/user.nix";
+              in {
+                isNormalUser = true;
+                extraGroups = settings.groups;
+              };
+          };)
+          (nixpkgs.lib.mapAttrsToList
+            (name: value: name)
+            (builtins.readDir path);
+          )
+        )
+    in {
+      imports = imports ++ [
+        (rootPath + "/common/host-programs/.home-manager.nix")
+        (rootPath + "/host/${hostName}/hardware-configuration.nix")
+      ];
+      users.users = users;
+      networking.hostName = hostName;
+      time.timeZone = timeZone;
+      i18n.defaultLocale = locale;
+      system.stateVersion = "24.05";
+    };
 
   buildHome = username: { imports }: {
     imports = imports ++ [
