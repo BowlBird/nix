@@ -1,8 +1,17 @@
 { pkgs, ... }: {
+  environment.systemPackages = [(
+    pkgs.writeScriptBin "system" ''
+      rebuild() {
+        level=$1
+        flake=$2
+        home=$HOME
 
-  environment.systemPackages = [
-    (pkgs.writeScriptBin "system" ''
-      echo "hi"
-    '')
-  ];
+        echo $level $flake $home
+
+      }
+      clean() {
+        echo clean
+      }
+    ''
+  )];
 }
