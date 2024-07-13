@@ -93,7 +93,7 @@
         (rootPath + "/common/host-programs/.home-manager.nix")
         (rootPath + "/host/${hostName}/hardware-configuration.nix")
       ];
-      users.users = getUsers path;
+      users.users = getUsers (rootPath + "/host/${hostName}/home");
       networking.hostName = hostName;
       time.timeZone = timeZone;
       i18n.defaultLocale = locale;
