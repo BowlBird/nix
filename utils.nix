@@ -75,8 +75,8 @@
       homeConfigurations = buildHomes hostHomeList args;
     };
 
-  buildImports = imports: with nixpkgs.lib; flatten
-    (nixpkgs.lib.mapAttrsToList
+  buildImports = imports: with nixpkgs.lib; with helpers; flatten
+    (mapAttrsToList
       (name: value: (map
         (module: moduleDir name + "/${module}.nix")
         (value)
