@@ -6,6 +6,14 @@
         (name: value: name)
         (builtins.readDir path)
       );
+
+    dirName = path: with nixpkgs.lib;
+      (builtins.elemAt
+        (lists.reverseList
+          (strings.splitString "/" (toString path))
+        )
+        0
+      );
   };
 
   build = args: with helpers; let
@@ -71,7 +79,7 @@
     );
 
 
-  buildHost = hostPath: { imports, timeZone, locale }:
+  buildHost = hostPath: { imports, timeZone, locale }: with helpers;
     let
       hostName = dirName hostPath;
       getUsers = { }: builtins.listToAttrs
@@ -102,7 +110,7 @@
       system.stateVersion = "24.05";
     };
 
-  buildHome = usernamePath: { imports }:
+  buildHome = usernamePath: { imports }: with helpers;
     let
       username = dirName usernamePath;
     in {
@@ -116,11 +124,4 @@
       };
     };
 
-  dirName = path: with nixpkgs.lib;
-      (builtins.elemAt
-        (lists.reverseList
-          (strings.splitString "/" (toString path))
-        )
-        0
-      );
 }
