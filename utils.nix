@@ -1,22 +1,23 @@
 { nixpkgs, home-manager, rootPath, ... }: rec {
 
-  build = args: let
-    hosts = (nixpkgs.lib.mapAttrsToList
-      (name: value: name)
-      (builtins.readDir ./host)
-    );
+  helpers = {
+    childrenNameList = path:
+      (nixpkgs.lib.mapAttrsToList
+        (name: value: name)
+        (builtins.readDir path)
+      )
+  };
 
+  build = args: let
+    hosts = childrenNameList ./host;
     users =
-    (map
-      (host: {
-        system = host;
-        users = (nixpkgs.lib.mapAttrsToList
-          (name: value: name)
-          (builtins.readDir (./host + "/${host}/home"))
-        );
-      })
-      hosts
-    );
+      (map
+        (host: {
+          system = host;
+          users = childrenNameList (./host + "/${host}/home");
+        })
+        hosts
+      );
 
     buildSystems = systems: args: builtins.listToAttrs
       (map
