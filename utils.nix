@@ -69,7 +69,7 @@
       (imports)
     );
 
-  buildHost = { imports, users, hostName, timeZone, locale }: {
+  buildHost = hostName: { imports, users, timeZone, locale }: {
     imports = imports ++ [
       (rootPath + "/common/host-programs/.home-manager.nix")
       (rootPath + "/host/${hostName}/hardware-configuration.nix")
@@ -81,7 +81,7 @@
     system.stateVersion = "24.05";
   };
 
-  buildHome = { imports, username }: {
+  buildHome = username: { imports }: {
     imports = imports ++ [
       (rootPath + "/common/home/.home-manager.nix")
     ];

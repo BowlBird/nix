@@ -1,4 +1,4 @@
-{ inputs, sysUtils, lib, config, pkgs, ... }: sysUtils.buildHost {
+{ inputs, sysUtils, lib, config, pkgs, ... }: sysUtils.buildHost (dirName ./.) {
   imports = sysUtils.buildImports {
     host = [
       "nix-settings"
@@ -17,7 +17,6 @@
     ];
   };
 
-  hostName = "nest";
   timeZone = "America/Chicago";
   locale = "en_US.UTF-8";
 
