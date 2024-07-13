@@ -17,18 +17,18 @@
 
     hostDir = host: ./host + "/${host}";
 
-    homeDir = host: home: ./host + "/${host}/home/${home}";
+    homeDir = host: home: hostDir host + "/home/${home}";
 
     moduleDir = module: ./common + "/${module}";
   };
 
   build = args: with helpers; let
     hosts = childrenNameList ./host;
-    users =
+    hostHomeList =
       (map
         (host: {
           inherit host;
-          users = childrenNameList (hostDir host + "/home");
+          homes = childrenNameList (hostDir host + "/home");
         })
         hosts
       );
@@ -50,8 +50,8 @@
       hostDefinitions = flatten
         (map
           (host: (map
-            (user: {inherit (host) host; inherit user;})
-            host.users
+            (home: {inherit (host) host; inherit home;})
+            host.homes
           ))
           hosts
         );
@@ -59,26 +59,26 @@
         builtins.listToAttrs
           (map
             (definition: let
-              inherit (definition) user host;
+              inherit (definition) home host;
             in {
-              name = "${user}@${host}";
+              name = "${home}@${host}";
               value = home-manager.lib.homeManagerConfiguration {
                 pkgs = nixpkgs.legacyPackages.x86_64-linux;
                 extraSpecialArgs = args;
-                modules = [(homeDir host user)];
+                modules = [(homeDir host home)];
               };
             })
             hostDefinitions
           );
     in {
       nixosConfigurations = buildHosts hosts args;
-      homeConfigurations = buildHomes users args;
+      homeConfigurations = buildHomes hostHomeList args;
     };
 
   buildImports = imports: with nixpkgs.lib; flatten
     (nixpkgs.lib.mapAttrsToList
       (name: value: (map
-        (module: rootPath + "/common/${name}/${module}.nix")
+        (module: moduleDir name + "/${module}.nix")
         (value)
       ))
       (imports)
@@ -87,29 +87,26 @@
 
   buildHost = hostPath: { imports, timeZone, locale }: with helpers;
     let
-      hostName = dirName hostPath;
-      getUsers = { }: builtins.listToAttrs
+      host = dirName hostPath;
+      users = builtins.listToAttrs
         (map
           (user: {
             name = user;
             value = let
-                settings = import (rootPath + "/host/${hostName}/home/${user}/user.nix") { };
+                settings = import (homeDir host user + "/user.nix") { };
               in {
                 isNormalUser = true;
                 extraGroups = settings.groups;
               };
           })
-          (nixpkgs.lib.mapAttrsToList
-            (name: value: name)
-            (builtins.readDir (rootPath + "/host/${hostName}/home"))
-          )
+          (childrenNameList (hostDir host + "/home"))
         );
     in {
       imports = imports ++ [
-        (rootPath + "/common/host-programs/.home-manager.nix")
-        (rootPath + "/host/${hostName}/hardware-configuration.nix")
+        (moduleDir "host-programs" + "/.home-manager.nix")
+        (hostDir host + "/hardware-configuration.nix")
       ];
-      users.users = getUsers { };
+      users = {inherit users;};
       networking.hostName = hostName;
       time.timeZone = timeZone;
       i18n.defaultLocale = locale;
@@ -121,13 +118,12 @@
       username = dirName usernamePath;
     in {
       imports = imports ++ [
-        (rootPath + "/common/home/.home-manager.nix")
+        (moduleDir home + "/.home-manager.nix")
       ];
       home = {
-        username = username;
+        inherit username;
         homeDirectory = "/home/" + username;
         stateVersion = "24.05";
       };
     };
-
 }
