@@ -18,6 +18,8 @@
     hostDir = host: ./host + "/${host}";
 
     homeDir = host: home: ./host + "/${host}/${home}";
+
+    moduleDir = module: ./common + "/${module}";
   };
 
   build = args: with helpers; let
@@ -31,45 +33,45 @@
         hosts
       );
 
-    buildSystems = systems: args: builtins.listToAttrs
+    buildHosts = hosts: args: builtins.listToAttrs
       (map
-        (system: {
-          name = system;
+        (host: {
+          name = host;
           value = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             specialArgs = args;
-            modules = [(./host + "/${system}")];
+            modules = [(hostDir host)];
           };
         })
-        systems
+        hosts
       );
 
-    buildHomes = systems: args: with nixpkgs.lib; let
-      systemDefinitions = flatten
+    buildHomes = hosts: args: with nixpkgs.lib; let
+      hostDefinitions = flatten
         (map
-          (system: (map
-            (user: {inherit (system) system; inherit user;})
-            system.users
+          (host: (map
+            (user: {inherit (host) host; inherit user;})
+            host.users
           ))
-          systems
+          hosts
         );
       in
         builtins.listToAttrs
           (map
             (definition: let
-              inherit (definition) user system;
+              inherit (definition) user host;
             in {
-              name = "${user}@${system}";
+              name = "${user}@${host}";
               value = home-manager.lib.homeManagerConfiguration {
                 pkgs = nixpkgs.legacyPackages.x86_64-linux;
                 extraSpecialArgs = args;
-                modules = [(./host + "/${system}/home/${user}")];
+                modules = [(userDir host user)];
               };
             })
-            systemDefinitions
+            hostDefinitions
           );
     in {
-      nixosConfigurations = buildSystems hosts args;
+      nixosConfigurations = buildHosts hosts args;
       homeConfigurations = buildHomes users args;
     };
 
