@@ -118,7 +118,7 @@
       username = dirName usernamePath;
     in {
       imports = imports ++ [
-        (moduleDir home + "/.home-manager.nix")
+        (moduleDir "home" + "/.home-manager.nix")
       ];
       home = {
         inherit username;
