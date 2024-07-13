@@ -103,7 +103,8 @@
         );
     in {
       imports = imports ++ [
-        (moduleDir "host-programs" + "/.home-manager.nix")
+        (moduleDir "host" + "/.home-manager.nix")
+        (moduleDir "host" + "/.nix-system.nix")
         (hostDir host + "/hardware-configuration.nix")
       ];
       users = {inherit users;};
