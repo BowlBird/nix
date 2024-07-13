@@ -5,6 +5,4 @@
       "git-bowlbird"
     ];
   };
-
-  username = "bowlbird";
 }
