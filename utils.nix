@@ -1,6 +1,6 @@
 { nixpkgs, home-manager, rootPath, ... }: rec {
 
-  helpers = {
+  helpers = rec {
     childrenNameList = path:
       (nixpkgs.lib.mapAttrsToList
         (name: value: name)
