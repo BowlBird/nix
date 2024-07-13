@@ -72,12 +72,12 @@
 
   buildHost = hostName: { imports, timeZone, locale }:
     let
-      getUsers = path: builtins.listToAttrs
+      getUsers = { }: builtins.listToAttrs
         (map
           (user: {
             name = user;
             value = let
-                settings = import path + "/${user}/user.nix";
+                settings = import rootPath + "/host/${hostName}/home/${user}/user.nix";
               in {
                 isNormalUser = true;
                 extraGroups = settings.groups;
@@ -93,7 +93,7 @@
         (rootPath + "/common/host-programs/.home-manager.nix")
         (rootPath + "/host/${hostName}/hardware-configuration.nix")
       ];
-      users.users = getUsers (rootPath + "/host/${hostName}/home");
+      users.users = getUsers { };
       networking.hostName = hostName;
       time.timeZone = timeZone;
       i18n.defaultLocale = locale;
