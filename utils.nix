@@ -17,7 +17,7 @@
 
     hostDir = host: ./host + "/${host}";
 
-    homeDir = host: home: ./host + "/${host}/${home}"
+    homeDir = host: home: ./host + "/${host}/${home}";
   };
 
   build = args: with helpers; let
