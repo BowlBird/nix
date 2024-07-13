@@ -1,5 +1,3 @@
-{ pkgs, ... }: {
-  system = pkgs.writeScriptBin "system" ''
+{ pkgs, ... }: pkgs.writeScriptBin "system" ''
     echo "hi"
   '';
-}
