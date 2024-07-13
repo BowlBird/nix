@@ -77,7 +77,7 @@
           (user: {
             name = user;
             value = let
-                settings = import (rootPath + "/host/${hostName}/home/${user}/user.nix");
+                settings = import (rootPath + "/host/${hostName}/home/${user}/user.nix") { };
               in {
                 isNormalUser = true;
                 extraGroups = settings.groups;
