@@ -85,7 +85,7 @@
           })
           (nixpkgs.lib.mapAttrsToList
             (name: value: name)
-            (builtins.readDir rootPath + "/host/${hostName}/home")
+            (builtins.readDir (rootPath + "/host/${hostName}/home"))
           )
         );
     in {
