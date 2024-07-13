@@ -82,7 +82,7 @@
                 isNormalUser = true;
                 extraGroups = settings.groups;
               };
-          };)
+          })
           (nixpkgs.lib.mapAttrsToList
             (name: value: name)
             (builtins.readDir path);
