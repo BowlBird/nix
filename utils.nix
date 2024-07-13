@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, rootPath, ... }: rec {
+{ nixpkgs, home-manager, rootPath, ... }: {
 
   build = args: let
     hosts = (nixpkgs.lib.mapAttrsToList
@@ -70,9 +70,8 @@
     );
 
 
-  buildHost = testHostName: { imports, timeZone, locale }:
+  buildHost = hostName: { imports, timeZone, locale }:
     let
-      hostName = dirName (./.);
       getUsers = { }: builtins.listToAttrs
         (map
           (user: {
