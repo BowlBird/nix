@@ -85,7 +85,7 @@
           })
           (nixpkgs.lib.mapAttrsToList
             (name: value: name)
-            (builtins.readDir path);
+            (builtins.readDir path)
           )
         )
     in {
