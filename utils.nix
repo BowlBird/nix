@@ -8,7 +8,7 @@
       );
   };
 
-  build = args: let
+  build = args: with helpers; let
     hosts = childrenNameList ./host;
     users =
       (map
