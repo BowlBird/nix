@@ -2,7 +2,7 @@
   imports = sysUtils.buildImports {
     home = [];
     home-programs = [
-      "git-bowlbird"
+      "git/bowlbird"
     ];
   };
 }
