@@ -5,7 +5,7 @@
       (nixpkgs.lib.mapAttrsToList
         (name: value: name)
         (builtins.readDir path)
-      )
+      );
   };
 
   build = args: let
