@@ -87,7 +87,7 @@
             (name: value: name)
             (builtins.readDir path)
           )
-        )
+        );
     in {
       imports = imports ++ [
         (rootPath + "/common/host-programs/.home-manager.nix")
