@@ -85,7 +85,7 @@
     );
 
 
-  buildHost = hostPath: { imports, ... }@inputs: with helpers; with inputs;
+  buildHost = hostPath: { imports, ... }@inputs: with helpers;
     let
       host = dirName hostPath;
       users = builtins.listToAttrs
@@ -102,14 +102,14 @@
           (childrenNameList (hostDir host + "/home"))
         );
     in {
-      imports = imports ++ [
+      imports = inputs.imports ++ [
         (moduleDir "host" + "/.home-manager.nix")
         (moduleDir "host" + "/.nix-system.nix")
         (hostDir host + "/hardware-configuration.nix")
       ];
       users = {inherit users;};
       networking.hostName = host;
-      time.timeZone = timeZone;
+      time.timeZone = inputs.timeZone;
       i18n.defaultLocale = "en_US.UTF-8";
       system.stateVersion = "24.05";
     };
