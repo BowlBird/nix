@@ -85,7 +85,7 @@
     );
 
 
-  buildHost = hostPath: { imports, ... }: with helpers;
+  buildHost = hostPath: { imports, ... }@inputs: with helpers; with inputs;
     let
       host = dirName hostPath;
       users = builtins.listToAttrs
