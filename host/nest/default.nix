@@ -1,6 +1,7 @@
 { inputs, sysUtils, lib, config, pkgs, ... }: with sysUtils; buildHost ./. {
-  imports = sysUtils.buildImports {
+  imports = buildImports {
     host = [
+      "auto-timezone"
       "nix-settings"
       "boot-systemd-splash"
       "audio-pipewire"
@@ -16,7 +17,4 @@
       "neovim"
     ];
   };
-
-  timeZone = "America/Chicago";
-  locale = "en_US.UTF-8";
 }

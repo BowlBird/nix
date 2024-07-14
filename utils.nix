@@ -85,7 +85,7 @@
     );
 
 
-  buildHost = hostPath: { imports, timeZone, locale }: with helpers;
+  buildHost = hostPath: { imports, ... }: with helpers;
     let
       host = dirName hostPath;
       users = builtins.listToAttrs
@@ -110,7 +110,7 @@
       users = {inherit users;};
       networking.hostName = host;
       time.timeZone = timeZone;
-      i18n.defaultLocale = locale;
+      i18n.defaultLocale = "en_US.UTF-8";
       system.stateVersion = "24.05";
     };
 
