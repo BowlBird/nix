@@ -39,7 +39,11 @@
       }
 
       function system_clean {
-          nix-collect-garbage
+        nix-collect-garbage
+      }
+
+      function system_update {
+        nix flake update $CONFIG_PATH
       }
 
       case $1 in
@@ -58,6 +62,9 @@
               ;;
           clean)
               system_clean
+              ;;
+          update)
+              system_update
               ;;
           *)
               echo "Usage: $0 {rebuild {host|home} [option] [-v]|clean}"
