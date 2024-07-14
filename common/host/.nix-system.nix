@@ -55,8 +55,12 @@
                   home)
                       home_manager_rebuild $3 $4
                       ;;
+                  all)
+                      nixos_rebuild $3 $4
+                      home_manager_rebuild $3 $4
+                      ;;
                   *)
-                      echo "Usage: $0 rebuild {host|home} [option] [-v]"
+                      echo "Usage: $0 rebuild {host|home|all} [option] [-v]"
                       ;;
               esac
               ;;
