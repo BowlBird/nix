@@ -1,3 +1,3 @@
 { pkgs, ...}: {
-  service.automatic-timezoned = true;
+  services.automatic-timezoned = true;
 }
