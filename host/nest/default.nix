@@ -10,6 +10,7 @@
       "console"
       "libinput"
       "printing"
+      "niri"
     ];
     host-programs = [
       "gnupg"

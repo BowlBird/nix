@@ -9,6 +9,8 @@
 		};
 
 		plymouth-theme-bowlbird-logo.url = "github:bowlbird/plymouth-theme-bowlbird-logo";
+
+		niri.url = "github:sodiboo/niri-flake";
 	};
 	outputs = { self, nixpkgs, home-manager, ... } @ inputs:
 		let
