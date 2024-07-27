@@ -7,7 +7,10 @@
     enable = true;
     package = pkgs.niri;
 
-    settings.binds = {
-    };
+    config = ''
+      binds {
+        Ctrl+Alt+Delete { quit skip-confirmation=true; }
+      }
+    '';
   };
 }
