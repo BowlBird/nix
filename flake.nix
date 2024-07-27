@@ -15,7 +15,6 @@
 	outputs = { self, nixpkgs, home-manager, ... } @ inputs:
 		let
 			inherit (self) outputs;
-			home-manager.news.display = "silent";
 			sysUtils = import ./utils.nix { inherit nixpkgs home-manager;};
 		in sysUtils.build { inherit inputs sysUtils outputs; };
 }

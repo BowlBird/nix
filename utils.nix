@@ -71,6 +71,7 @@
             hostDefinitions
           );
     in {
+      home-manager.news.display = "silent";
       nixosConfigurations = buildHosts hosts args;
       homeConfigurations = buildHomes hostHomeList args;
     };
