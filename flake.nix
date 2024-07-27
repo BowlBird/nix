@@ -12,7 +12,7 @@
 
 		niri.url = "github:sodiboo/niri-flake";
 	};
-	outputs = { self, nixpkgs, home-manager, ... } @ inputs:
+	outputs = { self, nixpkgs, home-manager, niri, ... } @ inputs:
 		let
 			inherit (self) outputs;
 			sysUtils = import ./utils.nix { inherit nixpkgs home-manager; };
