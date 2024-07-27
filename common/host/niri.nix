@@ -1,3 +1,3 @@
 { pkgs, ... }: {
-  programs.niri.package = pkgs.niri;
+  # programs.niri.package = pkgs.niri;
 }
