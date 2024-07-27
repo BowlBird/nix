@@ -6,5 +6,9 @@
   programs.niri = {
     enable = true;
     package = pkgs.niri;
+
+    binds = {
+      "Ctrl+Alt+Delete".action.quit.skip-confirmation = true;
+    };
   };
 }
