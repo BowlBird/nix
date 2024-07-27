@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   environment.systemPackages = [ pkgs.home-manager ];
-  programs.home-manager.news.display = "silent";
+  inputs.home-manager.news.display = "silent";
 }
