@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, niri, ... }: rec {
+{ nixpkgs, home-manager, ... }: rec {
 
   helpers = rec {
     childrenNameList = path:
@@ -103,7 +103,6 @@
         );
     in {
       imports = inputs.imports ++ [
-        niri.nixosModules.niri
         (moduleDir "host" + "/.home-manager.nix")
         (moduleDir "host" + "/.nix-system.nix")
         (hostDir host + "/hardware-configuration.nix")
