@@ -6,11 +6,5 @@
   programs.niri = {
     enable = true;
     package = pkgs.niri;
-
-    config = ''
-      binds {
-        Ctrl+Alt+Delete { quit skip-confirmation=true; }
-      }
-    '';
   };
 }

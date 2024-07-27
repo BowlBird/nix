@@ -3,6 +3,7 @@
     home = [];
     home-programs = [
       "git/bowlbird"
+      "niri/bowlbird"
     ];
   };
 }
