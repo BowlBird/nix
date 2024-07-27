@@ -1,9 +1,10 @@
 { inputs, sysUtils, lib, config, pkgs, ... }: with sysUtils; buildHome ./. {
   imports = sysUtils.buildImports {
-    home = [];
+    home = [
+      "niri/bowlbird"
+    ];
     home-programs = [
       "git/bowlbird"
-      "niri/bowlbird"
     ];
   };
 }
