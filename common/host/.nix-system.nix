@@ -60,7 +60,7 @@
               home_manager_rebuild $3 $4
               ;;
             *)
-              echo "Usage: $0 rebuild {host|home|all} [option] [-v]"
+              echo "Usage: $0 rebuild {host|home|all} [option] [-v] | clean | update"
               ;;
           esac
           ;;
@@ -71,7 +71,7 @@
           system_update
           ;;
         *)
-          echo "Usage: $0 {rebuild {host|home} [option] [-v]|clean}"
+          echo "Usage: $0 rebuild {host|home|all} [option] [-v] | clean | update"
           ;;
       esac
     ''
