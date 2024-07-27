@@ -7,7 +7,7 @@
     enable = true;
     package = pkgs.niri;
 
-    binds = {
+    settings.binds = {
       "Ctrl+Alt+Delete".action.quit.skip-confirmation = true;
     };
   };
