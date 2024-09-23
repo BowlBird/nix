@@ -3,13 +3,8 @@
     enable = true;
     plugins = [
       inputs.hyprland-easymotion.packages.${pkgs.system}.hyprland-easymotion
+      inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
     ];
-    #plugin = {
-    #  easymotion = {
-    #    textsize=15;
-    #    motionkeys="abcdefghijklmnopqrstuvwxyz";
-    #  };
-    #};
     settings = {
       dwindle = {
         preserve_split = true;

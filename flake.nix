@@ -9,13 +9,16 @@
 		};
 
         hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-
-		plymouth-theme-bowlbird-logo.url = "github:bowlbird/plymouth-theme-bowlbird-logo";
-
         hyprland-easymotion = {
             url = "github:bowlbird/hyprland-easymotion";
             inputs.hyprland.follows = "hyprland";
         };
+        split-monitor-workspaces = {
+          url = "github:Duckonaut/split-monitor-workspaces";
+          inputs.hyprland.follows = "hyprland";
+        };
+
+		plymouth-theme-bowlbird-logo.url = "github:bowlbird/plymouth-theme-bowlbird-logo";
 	};
 	outputs = { self, nixpkgs, home-manager, hyprland, ... } @ inputs:
 		let
