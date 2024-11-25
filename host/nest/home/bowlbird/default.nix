@@ -3,11 +3,13 @@
     home = [
       "hyprland/bowlbird"
       "xdg/bowlbird"
+      "theme/default"
     ];
     home-programs = [
       "git/bowlbird"
       "kitty"
       "chromium"
+      "matugen"
     ];
   };
 }

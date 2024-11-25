@@ -3,7 +3,7 @@
 let
   tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
   permissions = "touch /tmp/hyprland.log; chmod +770 /tmp/hyprland.log;";
-  session = "${pkgs.hyprland}/bin/Hyprland";
+  session = "Hyprland";
   username = "bowlbird";
 in {
   services.greetd = {

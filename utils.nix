@@ -1,4 +1,5 @@
 { nixpkgs, home-manager, ... }: rec {
+  #home-manager.backupFileExtension = "backup";
 
   helpers = rec {
     childrenNameList = path:

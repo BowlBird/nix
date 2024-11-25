@@ -43,7 +43,14 @@
       }
 
       function system_update {
-        nix flake update $CONFIG_PATH
+        nix flake update --flake $CONFIG_PATH
+      }
+
+      function set_color_scheme {
+        color=$1
+        background_color=$(matugen color hex "$color" -j hex | jq .colors.dark.surface_container | tr -d '"')
+        magick -size 1x1 xc:"$background_color" "$HOME"/.cache/background_color.png
+        matugen image "$HOME"/.cache/background_color.png
       }
 
       case $1 in
@@ -70,8 +77,11 @@
         update)
           system_update
           ;;
+        setcolor)
+          set_color_scheme $2
+          ;;
         *)
-          echo "Usage: $0 rebuild {host|home|all} [option] [-v] | clean | update"
+          echo "Usage: $0 rebuild {host|home|all} [option] [-v] | clean | update | setcolor {hexcode}"
           ;;
       esac
     ''
