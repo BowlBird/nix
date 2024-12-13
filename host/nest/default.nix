@@ -1,7 +1,7 @@
 { inputs, sysUtils, lib, config, pkgs, ... }: with sysUtils; buildHost ./. {
   imports = buildImports {
     host = [
-      "auto-timezone"
+      "central-timezone"
       "nix-settings"
       "caps2esc"
       "auto-login/hyprland-bowlbird"
@@ -31,6 +31,10 @@
       "vesktop"
       "nwg-look"
       "wev"
+      "xprop"
+      "brightnessctl"
+      "fastfetch"
+      "nil"
     ];
   };
 }

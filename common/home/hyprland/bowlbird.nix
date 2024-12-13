@@ -47,14 +47,20 @@
       bindModes = {
 	    reset = [
 	      "bind = , super_l, submap, command"
+		  "bind = alt_l, F1, exec, kitty --hold fastfetch"
 		  "bindl = , XF86AudioMute, exec, pamixer --set-volume 0"
 	      "bindrl = , XF86AudioLowerVolume, exec, pamixer -d 5"
 	      "bindrl = , XF86AudioRaiseVolume, exec, pamixer -i 5"
+		  "bindrl = , XF86MonBrightnessDown, exec, brightnessctl s 4%-"
+		  "bindrl = , XF86MonBrightnessUp, exec, brightnessctl s +4%"
 	    ];
 	    command = [
+		  "bind = alt_l, F1, exec, kitty --hold fastfetch"
 		  "bindl = , XF86AudioMute, exec, pamixer --set-volume 0"
 	      "bindrl = , XF86AudioLowerVolume, exec, pamixer -d 5"
 	      "bindrl = , XF86AudioRaiseVolume, exec, pamixer -i 5"
+		  "bindrl = , XF86MonBrightnessDown, exec, brightnessctl s 4%-"
+		  "bindrl = , XF86MonBrightnessUp, exec, brightnessctl s +4%"
 	      "bind = control_l alt_l, delete, exit"
 	      "bind = , escape, submap, reset"
 	      "bind = , t, exec, kitty"

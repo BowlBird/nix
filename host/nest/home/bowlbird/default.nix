@@ -10,6 +10,7 @@
       "kitty"
       "chromium"
       "matugen"
+      "vscodium"
     ];
   };
 }
